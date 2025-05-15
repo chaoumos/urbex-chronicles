@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {format} from 'date-fns';
+
+const posts = await Astro.glob('../../content/blog/**/*.md');
+---
+
+<Layout title="Urbex Chronicles Blog" description="Articles about urban exploration.">
+    <main class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-6">Blog</h1>
+        <ul>
+            {posts.map((post) => (
+                <li class="mb-4">
+                    <a href={post.url} class="text-xl font-semibold hover:text-accent">
+                        {post.frontmatter.title}
+                    </a>
+                    <p class="text-gray-500 dark:text-gray-400">
+                        Published: {format(new Date(post.frontmatter.pubDate), 'MMMM dd, yyyy')}
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        {post.frontmatter.description}
+                    </p>
+                </li>
+            ))}
+        </ul>
+    </main>
+</Layout>

@@ -1,0 +1,41 @@
+---
+import type { Props } from 'astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+		<meta name="description" content={description}>
+		<meta name="generator" content={Astro.generator} />
+		<title>{Astro.props.title || `Urbex Chronicles: Exploring the Abandoned World`}</title>
+	</head>
+	<body class="bg-dark-primary text-light-text">
+		<header class="py-4 px-6 flex items-center justify-between">
+			<a href="/" class="text-xl font-bold">Urbex Chronicles</a>
+			<nav>
+				<ul class="flex space-x-4">
+					<li><a href="/" class="hover:text-accent">Home</a></li>
+					<li><a href="/blog" class="hover:text-accent">Blog</a></li>
+					<li><a href="#" class="hover:text-accent">Safety First</a></li>
+					<li><a href="#" class="hover:text-accent">Gallery</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main class="px-6 py-8">
+			<slot />
+		</main>
+		<footer class="bg-dark-secondary py-4 px-6 text-center">
+			© {new Date().getFullYear()} Urbex Chronicles: Exploring the Abandoned World
+		</footer>
+	</body>
+</html>
